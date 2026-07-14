@@ -691,7 +691,14 @@ class DataChain:
         # Handle retry and delta functionality
         if not result:
             result = self._handle_delta(
-                name, version, project, schema, update_version, kwargs
+                name=name,
+                version=version,
+                project=project,
+                schema=schema,
+                description=description,
+                attrs=attrs,
+                update_version=update_version,
+                kwargs=kwargs,
             )
 
         if not result:
@@ -863,6 +870,8 @@ class DataChain:
         version: str | None,
         project: Project,
         schema: dict,
+        description: str | None,
+        attrs: list[str] | None,
         update_version: str | None,
         kwargs: dict,
     ) -> "DataChain | None":
@@ -895,6 +904,8 @@ class DataChain:
                     project=project,
                     feature_schema=schema,
                     dependencies=dependencies,
+                    description=description,
+                    attrs=attrs,
                     update_version=update_version,
                     **kwargs,
                 )
